@@ -27,7 +27,6 @@
     color: #e8e4dc;
   }
 
-  /* ── TILE LAYER ─────────────────────────────── */
   #grid {
     position: fixed;
     top: 0; left: 0;
@@ -43,6 +42,7 @@
     will-change: transform;
     -webkit-transform: perspective(500px) translateZ(0px);
     transform:         perspective(500px) translateZ(0px);
+    /* background defined here so resetting inline styles never shows black */
     background:
       linear-gradient(to bottom,
         rgba(255,255,255,0.07) 0px,
@@ -50,7 +50,6 @@
         #1a1a1a 1px);
   }
 
-  /* ── VIGNETTE — darkens edges so content is readable ── */
   #vignette {
     position: fixed; inset: 0; z-index: 1;
     background: radial-gradient(ellipse 90% 85% at 50% 50%,
@@ -60,25 +59,21 @@
     pointer-events: none;
   }
 
-  /* ── UI LAYER ───────────────────────────────── */
   #ui {
     position: fixed; inset: 0; z-index: 2;
     display: grid;
     grid-template-columns: 1fr 1.55fr;
-    grid-template-rows: 1fr;
     padding: clamp(2rem, 4vw, 3.5rem);
     gap: clamp(2rem, 4vw, 4rem);
-    pointer-events: none; /* let tile hover-events through by default */
+    pointer-events: none;
   }
 
   #ui > * { pointer-events: auto; }
 
-  /* ── LEFT — BIO ─────────────────────────────── */
   #bio {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0;
   }
 
   .bio-label {
@@ -112,16 +107,9 @@
     margin-bottom: 2.2rem;
   }
 
-  .bio-text em {
-    font-style: normal;
-    color: #c8c4ba;
-  }
+  .bio-text em { font-style: normal; color: #c8c4ba; }
 
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem .9rem;
-  }
+  .links { display: flex; flex-wrap: wrap; gap: .5rem .9rem; }
 
   .links a {
     font-size: .65rem;
@@ -135,12 +123,8 @@
     cursor: pointer;
   }
 
-  .links a:hover {
-    color: #f0ece3;
-    border-color: #f0ece3;
-  }
+  .links a:hover { color: #f0ece3; border-color: #f0ece3; }
 
-  /* ── RIGHT — PROJECTS ───────────────────────── */
   #projects {
     display: flex;
     flex-direction: column;
@@ -200,16 +184,9 @@
     pointer-events: none;
   }
 
-  .card:hover {
-    border-color: #3a3a34;
-    background: rgba(18,18,15,0.75);
-  }
+  .card:hover { border-color: #3a3a34; background: rgba(18,18,15,0.75); }
 
-  .card-num {
-    font-size: .6rem;
-    letter-spacing: .22em;
-    color: #3a3a34;
-  }
+  .card-num { font-size: .6rem; letter-spacing: .22em; color: #3a3a34; }
 
   .card-title {
     font-family: 'Bebas Neue', sans-serif;
@@ -226,12 +203,7 @@
     flex: 1;
   }
 
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .35rem;
-    margin-top: auto;
-  }
+  .card-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: auto; }
 
   .tag {
     font-size: .55rem;
@@ -244,10 +216,7 @@
     transition: color .2s, border-color .2s;
   }
 
-  .card:hover .tag {
-    color: #6b6b60;
-    border-color: #2e2e28;
-  }
+  .card:hover .tag { color: #6b6b60; border-color: #2e2e28; }
 
   .card-arrow {
     position: absolute;
@@ -256,15 +225,10 @@
     font-size: .9rem;
     color: #2e2e28;
     transition: color .25s, transform .25s;
-    line-height: 1;
   }
 
-  .card:hover .card-arrow {
-    color: #c8c4ba;
-    transform: translate(2px, -2px);
-  }
+  .card:hover .card-arrow { color: #c8c4ba; transform: translate(2px,-2px); }
 
-  /* ── MOBILE ─────────────────────────────────── */
   @media (max-width: 680px) {
     #ui {
       grid-template-columns: 1fr;
@@ -272,16 +236,13 @@
       padding: 1.6rem 1.4rem;
       gap: 1.8rem;
     }
-
     h1 { font-size: clamp(3.5rem, 16vw, 5rem); margin-bottom: 1rem; }
     .bio-text { max-width: 100%; font-size: .72rem; margin-bottom: 1.4rem; }
-
     #bio { justify-content: flex-end; }
     #projects { justify-content: flex-start; }
-
     .grid { gap: .7rem; }
     .card { padding: .9rem; }
-    .card-desc { display: none; } /* too cramped on small screens */
+    .card-desc { display: none; }
   }
 </style>
 </head>
@@ -291,13 +252,11 @@
 <div id="vignette"></div>
 
 <div id="ui">
-
-  <!-- LEFT: BIO -->
   <div id="bio">
     <p class="bio-label">Portfolio</p>
     <h1>Your<br><span class="outline">Nurbolot Altynbek uulu</span></h1>
     <p class="bio-text">
-      <em>Designer &amp; developer</em> Graduated YZU Taiwan in 2026.
+      <em>Designer &amp; developer</em> 2026 CS graduate in YZU, Taiwan.
       I build interfaces that feel considered — systems that stay out of the way
       and <em>experiences people remember</em>.
     </p>
@@ -309,35 +268,33 @@
     </nav>
   </div>
 
-  <!-- RIGHT: PROJECTS -->
   <div id="projects">
     <div class="projects-header">
       <span class="projects-label">Selected Work</span>
     </div>
     <div class="grid" id="project-grid"></div>
   </div>
-
 </div>
 
 <script>
-/* ─────────────────────────────────────────────
-   TILE BACKGROUND
-───────────────────────────────────────────── */
 const TILE_SIZE    = 52;
 const GAP          = 3;
 const STEP         = TILE_SIZE + GAP;
 const HOVER_RADIUS = 200;
-const MAX_LIFT     = 72;
+const MAX_LIFT     = 85;
 const LERP         = 0.10;
 const WAVE_SPEED   = 500;
 const WAVE_WIDTH   = 70;
 const WAVE_LIFT    = 32;
 const WAVE_DECAY   = 2200;
+const TARGET_FPS   = 30;
+const FRAME_MS     = 1000 / TARGET_FPS;
 
 const grid = document.getElementById('grid');
 let cols = 0, rows = 0, tiles = [];
 let mouseX = -99999, mouseY = -99999;
 let waves = [];
+let lastFrame = 0;
 
 function build() {
   const nc = Math.ceil((window.innerWidth  + 8) / STEP) + 1;
@@ -355,10 +312,13 @@ function build() {
       const el = document.createElement('div');
       el.className = 'tile';
       grid.appendChild(el);
-      tiles.push({ el,
+      tiles.push({
+        el,
         cx: c * STEP + TILE_SIZE / 2,
         cy: r * STEP + TILE_SIZE / 2,
-        z: 0, targetZ: 0 });
+        z: 0, targetZ: 0,
+        active: false  // tracks whether tile is currently displaced
+      });
     }
   }
 }
@@ -369,21 +329,48 @@ function falloff(t) {
 }
 
 function tick(ts) {
+  requestAnimationFrame(tick);
+
+  // throttle to TARGET_FPS
+  if (ts - lastFrame < FRAME_MS) return;
+  lastFrame = ts;
+
   waves = waves.filter(w => (ts - w.t0) < WAVE_DECAY);
+
+  // precompute max wave radius for culling
+  const waveMaxR = waves.map(w => (ts - w.t0) * WAVE_SPEED / 1000 + WAVE_WIDTH / 2);
+
   for (let i = 0; i < tiles.length; i++) {
     const tile = tiles[i];
-    const dx = mouseX - tile.cx, dy = mouseY - tile.cy;
-    tile.targetZ = MAX_LIFT * falloff(1 - Math.sqrt(dx*dx + dy*dy) / HOVER_RADIUS);
+    const dx   = mouseX - tile.cx;
+    const dy   = mouseY - tile.cy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    // cull: skip if outside hover radius AND outside every wave band
+    let inWave = false;
+    for (let wi = 0; wi < waves.length; wi++) {
+      const w   = waves[wi];
+      const wdx = tile.cx - w.x, wdy = tile.cy - w.y;
+      const td  = Math.sqrt(wdx * wdx + wdy * wdy);
+      const front = (ts - w.t0) * WAVE_SPEED / 1000;
+      if (Math.abs(td - front) < WAVE_WIDTH / 2) { inWave = true; break; }
+    }
+
+    const inHover = dist < HOVER_RADIUS;
+
+    if (!inHover && !inWave && !tile.active) continue; // skip entirely
+
+    tile.targetZ = inHover ? MAX_LIFT * falloff(1 - dist / HOVER_RADIUS) : 0;
 
     let waveZ = 0;
     for (let wi = 0; wi < waves.length; wi++) {
       const w   = waves[wi];
       const age = ts - w.t0;
       const wdx = tile.cx - w.x, wdy = tile.cy - w.y;
-      const d   = Math.sqrt(wdx*wdx + wdy*wdy);
-      const delta = d - age * WAVE_SPEED / 1000;
+      const td  = Math.sqrt(wdx * wdx + wdy * wdy);
+      const delta = td - age * WAVE_SPEED / 1000;
       if (Math.abs(delta) < WAVE_WIDTH / 2) {
-        const pulse = Math.sin((1 - Math.abs(delta / (WAVE_WIDTH/2))) * Math.PI);
+        const pulse = Math.sin((1 - Math.abs(delta / (WAVE_WIDTH / 2))) * Math.PI);
         waveZ += WAVE_LIFT * pulse * (1 - age / WAVE_DECAY);
       }
     }
@@ -391,21 +378,28 @@ function tick(ts) {
     tile.z += (tile.targetZ - tile.z) * LERP;
     const z = tile.z + waveZ;
 
-    if (Math.abs(z) > 0.08) {
-      const tx = `perspective(500px) translateZ(${z.toFixed(2)}px)`;
+    if (Math.abs(z) > 0.1) {
+      tile.active = true;
+      const tx = `perspective(500px) translateZ(${z.toFixed(1)}px)`;
       tile.el.style.webkitTransform = tx;
-      tile.el.style.transform = tx;
+      tile.el.style.transform       = tx;
       const sh = Math.min(z, 80);
       tile.el.style.boxShadow    = `0 ${(sh*.6).toFixed(1)}px ${(sh*1.3).toFixed(1)}px rgba(0,0,0,.85)`;
       const bw = Math.max(0.5, z * 0.07).toFixed(1);
       tile.el.style.borderBottom = `${bw}px solid #090909`;
       tile.el.style.borderRight  = `${bw}px solid #070707`;
-    } else if (tile.z !== 0 || tile.el.style.transform !== '') {
+    } else if (tile.active) {
+      // reset only individual properties — never wipe cssText
+      // so the class background is never briefly missing
       tile.z = 0;
-      tile.el.style.cssText = '';
+      tile.active = false;
+      tile.el.style.webkitTransform = 'perspective(500px) translateZ(0px)';
+      tile.el.style.transform       = 'perspective(500px) translateZ(0px)';
+      tile.el.style.boxShadow       = '';
+      tile.el.style.borderBottom    = '';
+      tile.el.style.borderRight     = '';
     }
   }
-  requestAnimationFrame(tick);
 }
 
 function spawnWave(x, y) { waves.push({ x, y, t0: performance.now() }); }
@@ -437,38 +431,12 @@ if (window.visualViewport) window.visualViewport.addEventListener('resize', onRe
 build();
 requestAnimationFrame(tick);
 
-/* ─────────────────────────────────────────────
-   PROJECTS  — edit this array
-───────────────────────────────────────────── */
+/* ── PROJECTS ── */
 const projects = [
-  {
-    num: '01',
-    title: 'Project Alpha',
-    desc: 'A short line about what this does and why it matters.',
-    tags: ['Design', 'React'],
-    href: '#'
-  },
-  {
-    num: '02',
-    title: 'Project Beta',
-    desc: 'Another project — the problem it solves, simply stated.',
-    tags: ['Node.js', 'API'],
-    href: '#'
-  },
-  {
-    num: '03',
-    title: 'Project Gamma',
-    desc: 'Third entry. Tool, system, experiment — whatever it is.',
-    tags: ['Python', 'ML'],
-    href: '#'
-  },
-  {
-    num: '04',
-    title: 'Project Delta',
-    desc: 'Fourth. Open source, side project, client work.',
-    tags: ['Rust', 'CLI'],
-    href: '#'
-  },
+  { num: '01', title: 'Project Alpha', desc: 'A short line about what this does and why it matters.', tags: ['Design', 'React'], href: '#' },
+  { num: '02', title: 'Project Beta',  desc: 'Another project — the problem it solves, simply stated.', tags: ['Node.js', 'API'], href: '#' },
+  { num: '03', title: 'Project Gamma', desc: 'Third entry. Tool, system, experiment — whatever it is.', tags: ['Python', 'ML'], href: '#' },
+  { num: '04', title: 'Project Delta', desc: 'Fourth. Open source, side project, client work.', tags: ['Rust', 'CLI'], href: '#' },
 ];
 
 const pg = document.getElementById('project-grid');
@@ -483,7 +451,7 @@ projects.forEach(p => {
     <p class="card-num">${p.num}</p>
     <h2 class="card-title">${p.title}</h2>
     <p class="card-desc">${p.desc}</p>
-    <div class="card-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`;
+    <div class="card-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
   pg.appendChild(a);
 });
 </script>
