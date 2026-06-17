@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>Your Name</title>
+<title>Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
@@ -82,7 +82,7 @@
 
   /* ── BOXES ──────────────────────────────────── */
   .box {
-    background: rgba(255,255,255,0.42);
+    background: rgba(255,255,255,0.1);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(0,0,0,0.07);
@@ -111,7 +111,7 @@
 
   h1 {
     font-family: 'DM Mono', monospace;
-    font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+    font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 300;
     letter-spacing: .18em;
     text-transform: uppercase;
@@ -122,12 +122,14 @@
   h1 .outline { display: none; }
 
   .header-right {
+    transform: scale(0.9);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-left: auto;
+    margin-right: auto;
     gap: .7rem;
   }
+
 
   .role-tag {
     font-size: .75rem;
@@ -298,9 +300,72 @@
     color: #bbb;
     padding: .5rem 0 .5rem;
   }
+
+  /* ════ GEOMETRIC + WIRES DESIGN LAYER ════ */
+  .box { position: relative; }                 /* NO overflow:hidden — content stays visible */
+
+  /* background wrapper that clips the big 3D shape (content is a sibling, never clipped) */
+  .box-bg {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .box-bg svg { position: absolute; }
+  .box > *:not(.box-bg) { position: relative; z-index: 1; }
+
+  /* HUD corner ticks (all four corners) */
+  .box::before, .box::after {
+    content: ''; position: absolute;
+    width: 13px; height: 13px;
+    border: 0 solid rgba(0,0,0,0.26);
+    pointer-events: none; z-index: 2;
+  }
+  .box::before { top: 9px; left: 9px; border-top-width: 1px; border-left-width: 1px; }
+  .box::after  { bottom: 9px; right: 9px; border-bottom-width: 1px; border-right-width: 1px; }
+
+  /* geometric glyph next to labels */
+  .box-label { display: flex; align-items: center; gap: .6rem; }
+  .box-label .glyph { width: .8rem; height: .8rem; color: rgba(0,0,0,0.4); flex-shrink: 0; }
+  .box-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, rgba(0,0,0,0.16), rgba(0,0,0,0));
+  }
+
+  /* small geometric logo beside the name */
+  .name-wrap { display: flex; align-items: center; }
+  .name-logo { width: 1.6rem; height: 1.6rem; color: rgba(0,0,0,0.5); flex-shrink: 0; margin-right: .9rem; }
+
+  /* wire / pipe layer behind the boxes */
+  #panel { position: relative; padding-left: 30px; padding-right: 30px; }
+  #wires { position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none; overflow: visible; }
+
+  @media (max-width: 680px) {
+    #panel { padding-left: 14px; padding-right: 14px; }
+    #wires { display: none; }   /* gutter too tight on phones */
+  }
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="geo-hex" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
+      <path d="M12 3L20 7.5V16.5L12 21L4 16.5V7.5Z"/>
+    </symbol>
+    <symbol id="geo-tri" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
+      <path d="M12 4L20.5 19H3.5Z"/>
+    </symbol>
+    <symbol id="geo-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
+      <path d="M12 3L21 12L12 21L3 12Z"/><circle cx="12" cy="12" r="1.4"/>
+    </symbol>
+    <symbol id="geo-circle-dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/>
+      <circle cx="12" cy="12" r="1.4"/>
+    </symbol>
+  </defs>
+</svg>
 
 <div id="grid"></div>
 <div id="vignette"></div>
@@ -310,7 +375,10 @@
 
     <!-- NAME -->
     <div class="box" id="name-top">
-      <h1>Nurbolot Altynbek uulu</h1>
+      <div class="box-bg" data-poly="ico" data-size="230" data-x="left" data-op="0.05"></div>
+      <div class="name-wrap">
+        <h1>Nurbolot Altynbek uulu</h1>
+      </div>
       <div class="header-right">
         <span class="role-tag">Designer &amp; Developer</span>
         <nav class="header-links">
@@ -324,7 +392,8 @@
 
     <!-- BIO -->
     <div class="box" id="box-bio">
-      <p class="box-label">About</p>
+      <div class="box-bg" data-poly="cube" data-size="260" data-x="right" data-op="0.05"></div>
+      <p class="box-label"><svg class="glyph"><use href="#geo-circle-dot"/></svg>About</p>
       <p>
         I'm a computer science student at YZU who enjoys building small projects and learning how things work behind the scenes.
       </p>
@@ -340,19 +409,21 @@
 
     <!-- SKILLS -->
     <div class="box" id="box-skills">
-      <p class="box-label">Skills</p>
+      <div class="box-bg" data-poly="octa" data-size="230" data-x="right" data-op="0.05"></div>
+      <p class="box-label"><svg class="glyph"><use href="#geo-hex"/></svg>Skills</p>
       <div class="skill-groups" id="skill-groups"></div>
     </div>
 
     <!-- PROJECTS -->
     <div class="box" id="box-projects">
-      <p class="box-label">Selected Work</p>
+      <p class="box-label"><svg class="glyph"><use href="#geo-tri"/></svg>Selected Work</p>
       <div class="project-list" id="project-list"></div>
     </div>
 
     <!-- CONTACT -->
     <div class="box" id="box-contact">
-      <p class="box-label">Contact</p>
+      <div class="box-bg" data-poly="tetra" data-size="210" data-x="right" data-op="0.05"></div>
+      <p class="box-label"><svg class="glyph"><use href="#geo-square"/></svg>Contact</p>
       <div class="contact-links">
         <a class="contact-link" href="mailto:theleere@gmail.com">
           theleere@gmail.com <span>→</span>
@@ -538,6 +609,145 @@ projects.forEach(p => {
     <span class="project-arrow">↗</span>`;
   pl.appendChild(a);
 });
+
+
+/* ════════════════════════════════════════════
+   GEOMETRIC 3D WIREFRAMES + WIRES
+   ════════════════════════════════════════════ */
+(function geoLayer() {
+  const NS = 'http://www.w3.org/2000/svg';
+  const PHI = (1 + Math.sqrt(5)) / 2;
+
+  const SHAPES = {
+    octa:  [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
+    cube:  [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]],
+    tetra: [[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],
+    ico:   [[-1,PHI,0],[1,PHI,0],[-1,-PHI,0],[1,-PHI,0],
+            [0,-1,PHI],[0,1,PHI],[0,-1,-PHI],[0,1,-PHI],
+            [PHI,0,-1],[PHI,0,1],[-PHI,0,-1],[-PHI,0,1]],
+  };
+
+  function rot(v, ax, ay) {
+    let [x, y, z] = v;
+    let y1 = y * Math.cos(ax) - z * Math.sin(ax);
+    let z1 = y * Math.sin(ax) + z * Math.cos(ax);
+    y = y1; z = z1;
+    let x1 = x * Math.cos(ay) + z * Math.sin(ay);
+    z = -x * Math.sin(ay) + z * Math.cos(ay);
+    x = x1;
+    return [x, y, z];
+  }
+
+  function pathFor(type, S) {
+    const V = SHAPES[type];
+    const n = V.length;
+    const d3 = (a, b) => Math.hypot(V[a][0]-V[b][0], V[a][1]-V[b][1], V[a][2]-V[b][2]);
+    let minD = Infinity;
+    for (let i = 0; i < n; i++) for (let j = i+1; j < n; j++) minD = Math.min(minD, d3(i,j));
+    const edges = [];
+    for (let i = 0; i < n; i++) for (let j = i+1; j < n; j++) if (d3(i,j) < minD*1.08) edges.push([i,j]);
+    const P = V.map(v => { const r = rot(v, 0.5, 0.6); return [r[0], r[1]]; });
+    const xs = P.map(p=>p[0]), ys = P.map(p=>p[1]);
+    const mnx=Math.min(...xs), mxx=Math.max(...xs), mny=Math.min(...ys), mxy=Math.max(...ys);
+    const sc = S*0.92 / Math.max(mxx-mnx, mxy-mny);
+    const ox = (S-(mxx-mnx)*sc)/2 - mnx*sc, oy = (S-(mxy-mny)*sc)/2 - mny*sc;
+    let d = '';
+    edges.forEach(([a,b]) => {
+      d += `M${(P[a][0]*sc+ox).toFixed(1)} ${(P[a][1]*sc+oy).toFixed(1)}`
+         + `L${(P[b][0]*sc+ox).toFixed(1)} ${(P[b][1]*sc+oy).toFixed(1)}`;
+    });
+    return d;
+  }
+
+  function svgEl(type, S, stroke, sw) {
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${S} ${S}`);
+    svg.setAttribute('width', S);
+    svg.setAttribute('height', S);
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', pathFor(type, S));
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', stroke || 'currentColor');
+    p.setAttribute('stroke-width', sw || 1);
+    p.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(p);
+    return svg;
+  }
+
+  // fill big background shapes
+  document.querySelectorAll('.box-bg').forEach(bg => {
+    const type = bg.dataset.poly, S = +bg.dataset.size || 240;
+    const op = bg.dataset.op || '0.08';
+    const svg = svgEl(type, S, `rgba(0,0,0,${op})`, 1.3);
+    if (bg.dataset.x === 'left') { svg.style.left = '-30px'; }
+    else { svg.style.right = '-44px'; }
+    svg.style.top = '50%';
+    svg.style.transform = 'translateY(-50%)';
+    bg.appendChild(svg);
+  });
+
+  // fill small name logo (octahedron) — size controlled by CSS .name-logo
+  document.querySelectorAll('.name-logo').forEach(el => {
+    const svg = svgEl(el.dataset.poly || 'octa', 24, 'currentColor', 1.6);
+    svg.removeAttribute('width'); svg.removeAttribute('height');
+    svg.setAttribute('class', 'name-logo');
+    el.replaceWith(svg);
+  });
+
+  // ── WIRES: left bus + branch stubs into each box ──
+  function buildWires() {
+    const panel = document.getElementById('panel');
+    if (!panel) return;
+    let old = document.getElementById('wires');
+    if (old) old.remove();
+    if (window.innerWidth <= 680) return;
+
+    const W = panel.offsetWidth, H = panel.offsetHeight;
+    const svg = document.createElementNS(NS, 'svg');
+    svg.id = 'wires';
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', H);
+
+    const boxes = [...panel.querySelectorAll('.box')];
+    const busX = 12, boxX = 30; // boxX = panel left padding
+    const centers = boxes.map(b => b.offsetTop + b.offsetHeight / 2);
+    const top = centers[0], bot = centers[centers.length - 1];
+
+    const line = (x1,y1,x2,y2,w,o) => {
+      const l = document.createElementNS(NS,'line');
+      l.setAttribute('x1',x1); l.setAttribute('y1',y1);
+      l.setAttribute('x2',x2); l.setAttribute('y2',y2);
+      l.setAttribute('stroke',`rgba(0,0,0,${o})`); l.setAttribute('stroke-width',w);
+      svg.appendChild(l);
+    };
+    const dot = (x,y,r,o) => {
+      const c = document.createElementNS(NS,'circle');
+      c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r',r);
+      c.setAttribute('fill',`rgba(0,0,0,${o})`);
+      svg.appendChild(c);
+    };
+
+    // vertical bus
+    line(busX, top, busX, bot, 1, 0.16);
+    dot(busX, top, 2, 0.28);
+    dot(busX, bot, 2, 0.28);
+    // branch into each box
+    centers.forEach(cy => {
+      line(busX, cy, boxX, cy, 1, 0.16);
+      dot(busX, cy, 1.6, 0.22);
+      dot(boxX, cy, 2.2, 0.3);   // port dot on box edge
+    });
+
+    panel.insertBefore(svg, panel.firstChild);
+  }
+
+  buildWires();
+  let wt;
+  window.addEventListener('resize', () => { clearTimeout(wt); wt = setTimeout(buildWires, 160); });
+  // rebuild after fonts settle / content reflow
+  setTimeout(buildWires, 400);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildWires);
+})();
 </script>
 </body>
 </html>
