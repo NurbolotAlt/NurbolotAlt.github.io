@@ -21,7 +21,7 @@
     height: -webkit-fill-available;
     overflow: hidden;
     touch-action: none;
-    background: #f0f0f0;
+    background: #eef1f6;
     cursor: crosshair;
     font-family: 'DM Mono', monospace;
     color: #1a1a1a;
@@ -33,7 +33,7 @@
     top: -4px; left: -4px;
     display: grid;
     gap: 0;
-    background: #d8d8d8;
+    background: #dde3ec;
     z-index: 0;
   }
 
@@ -46,13 +46,13 @@
       linear-gradient(to bottom,
         rgba(255,255,255,0.95) 0px,
         rgba(255,255,255,0.95) 1px,
-        #ececec 1px);
+        #e7ecf3 1px);
   }
 
   #vignette {
     position: fixed; inset: 0; z-index: 1;
     background: radial-gradient(ellipse 70% 65% at 50% 50%,
-      rgba(160,160,160,0.55) 0%, rgba(180,180,180,0.2) 55%, transparent 100%);
+      rgba(150,162,190,0.5) 0%, rgba(170,180,200,0.18) 55%, transparent 100%);
     pointer-events: none;
   }
 
@@ -80,21 +80,29 @@
     gap: clamp(.6rem, 1.5vw, 1rem);
   }
 
+  /* ── ACCENT ─────────────────────────────────── */
+  :root {
+    --accent: #3059d6;
+    --ink: #17171a;
+    --ink-soft: #52525b;
+  }
+
   /* ── BOXES ──────────────────────────────────── */
   .box {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(252, 253, 255, 0.94);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(0,0,0,0.07);
+    border: 1px solid rgba(35,50,90,0.1);
     border-radius: 6px;
     padding: clamp(1.4rem, 3vw, 2rem);
+    box-shadow: 0 1px 2px rgba(20,30,60,0.05);
   }
 
   .box-label {
     font-size: .68rem;
     letter-spacing: .3em;
     text-transform: uppercase;
-    color: #bbb;
+    color: var(--accent);
     margin-bottom: 1.2rem;
   }
 
@@ -115,7 +123,7 @@
     font-weight: 300;
     letter-spacing: .18em;
     text-transform: uppercase;
-    color: #1a1a1a;
+    color: var(--ink);
     line-height: 1;
   }
 
@@ -135,7 +143,7 @@
     font-size: .75rem;
     letter-spacing: .18em;
     text-transform: uppercase;
-    color: #aaa;
+    color: var(--ink-soft);
   }
 
   .header-links {
@@ -149,30 +157,30 @@
     font-size: .72rem;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: #888;
+    color: var(--ink-soft);
     text-decoration: none;
     padding: .28rem .7rem;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.14);
     border-radius: 2px;
     transition: background .2s, color .2s, border-color .2s;
     cursor: pointer;
   }
 
   .header-links a:hover {
-    background: rgba(0,0,0,0.05);
-    color: #1a1a1a;
-    border-color: rgba(0,0,0,0.2);
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
   }
 
   /* ── BIO BOX ────────────────────────────────── */
   #box-bio p {
     font-size: clamp(.85rem, 1.4vw, .95rem);
     line-height: 1.9;
-    color: #555;
+    color: var(--ink-soft);
   }
 
   #box-bio p + p { margin-top: .9rem; }
-  #box-bio em { font-style: normal; color: #1a1a1a; }
+  #box-bio em { font-style: normal; color: var(--ink); }
 
   /* ── SKILLS BOX ─────────────────────────────── */
   .skill-groups { display: flex; flex-direction: column; gap: 1.1rem; }
@@ -181,7 +189,7 @@
     font-size: .66rem;
     letter-spacing: .22em;
     text-transform: uppercase;
-    color: #ccc;
+    color: #9a9aa2;
     margin-bottom: .5rem;
   }
 
@@ -192,14 +200,14 @@
     letter-spacing: .06em;
     padding: .28rem .7rem;
     background: rgba(0,0,0,0.04);
-    border: 1px solid rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.1);
     border-radius: 2px;
-    color: #444;
-    transition: background .2s;
+    color: var(--ink-soft);
+    transition: background .2s, border-color .2s, color .2s;
     cursor: default;
   }
 
-  .pill:hover { background: rgba(0,0,0,0.08); }
+  .pill:hover { background: rgba(48,89,214,0.08); border-color: rgba(48,89,214,0.35); color: var(--ink); }
 
   /* ── PROJECTS BOX ───────────────────────────── */
   .project-list { display: flex; flex-direction: column; }
@@ -227,7 +235,7 @@
   .project-num {
     font-size: .68rem;
     letter-spacing: .16em;
-    color: #ccc;
+    color: var(--accent);
     padding-top: .2rem;
   }
 
@@ -239,14 +247,14 @@
     font-weight: 300;
     letter-spacing: .18em;
     text-transform: uppercase;
-    color: #1a1a1a;
+    color: var(--ink);
     line-height: 1;
   }
 
   .project-desc {
     font-size: .8rem;
     line-height: 1.65;
-    color: #888;
+    color: var(--ink-soft);
   }
 
   .project-tags { display: flex; flex-wrap: wrap; gap: .28rem; margin-top: .2rem; }
@@ -257,20 +265,105 @@
     text-transform: uppercase;
     padding: .16rem .48rem;
     background: rgba(0,0,0,0.04);
-    border: 1px solid rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.09);
     border-radius: 2px;
-    color: #aaa;
+    color: #8a8a92;
   }
 
   .project-arrow {
     font-size: .85rem;
-    color: #ccc;
+    color: #c4c4cc;
     padding-top: .1rem;
     flex-shrink: 0;
     transition: color .2s, transform .2s;
   }
 
-  .project-row:hover .project-arrow { color: #1a1a1a; }
+  .project-row:hover .project-arrow { color: var(--accent); }
+
+  /* ── EDUCATION BOX ──────────────────────────── */
+  .edu-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .edu-degree {
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-weight: 300;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .edu-date {
+    font-size: .7rem;
+    letter-spacing: .14em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .edu-school {
+    font-size: .8rem;
+    color: var(--ink-soft);
+    margin-top: .35rem;
+  }
+
+  .edu-tags { display: flex; flex-wrap: wrap; gap: .28rem; margin-top: .8rem; }
+
+  /* ── EXPERIENCE BOX ─────────────────────────── */
+  .job-list { display: flex; flex-direction: column; }
+
+  .job-entry { padding: 1rem 0; }
+  .job-entry:not(:first-child) { border-top: 1px solid rgba(0,0,0,0.06); }
+
+  .job-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .job-title {
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(0.78rem, 1.6vw, .92rem);
+    font-weight: 300;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .job-date {
+    font-size: .7rem;
+    letter-spacing: .14em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .job-sub { font-size: .78rem; color: #8a8a92; margin-top: .3rem; }
+
+  .job-points { margin-top: .6rem; padding-left: 1.1rem; display: flex; flex-direction: column; gap: .4rem; }
+  .job-points li { font-size: .8rem; line-height: 1.6; color: var(--ink-soft); }
+
+  /* ── ACHIEVEMENTS BOX ───────────────────────── */
+  .achv-list { display: flex; flex-direction: column; }
+
+  .achv-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .7rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .achv-row:first-child { border-top: 1px solid rgba(0,0,0,0.06); }
+
+  .achv-text { font-size: .83rem; color: var(--ink-soft); }
+  .achv-date { font-size: .7rem; letter-spacing: .1em; color: var(--accent); white-space: nowrap; }
 
   /* ── CONTACT BOX ────────────────────────────── */
   .contact-links { display: flex; flex-direction: column; gap: .5rem; }
@@ -280,94 +373,32 @@
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
-    color: #555;
+    color: var(--ink-soft);
     font-size: .85rem;
     padding: .75rem 1rem;
     background: rgba(0,0,0,0.03);
-    border: 1px solid rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.09);
     border-radius: 3px;
-    transition: background .2s, color .2s;
+    transition: background .2s, color .2s, border-color .2s;
     letter-spacing: .05em;
     cursor: pointer;
   }
 
-  .contact-link:hover { background: rgba(0,0,0,0.07); color: #1a1a1a; }
-  .contact-link span { font-size: .85rem; }
+  .contact-link:hover { background: rgba(48,89,214,0.08); border-color: rgba(48,89,214,0.35); color: var(--ink); }
+  .contact-link:hover span { color: var(--accent); }
+  .contact-link span { font-size: .85rem; transition: color .2s; }
 
-  /* ── FOOTER ─────────────────────────────────── */
-  #panel-footer {
-    text-align: center;
-    font-size: .7rem;
-    letter-spacing: .14em;
-    color: #bbb;
-    padding: .5rem 0 .5rem;
-  }
-
-  /* ════ GEOMETRIC + WIRES DESIGN LAYER ════ */
-  .box { position: relative; }                 /* NO overflow:hidden — content stays visible */
-
-  /* background wrapper that clips the big 3D shape (content is a sibling, never clipped) */
-  .box-bg {
-    position: absolute; inset: 0;
-    overflow: hidden;
-    border-radius: 6px;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .box-bg svg { position: absolute; }
-  .box > *:not(.box-bg) { position: relative; z-index: 1; }
-
-  /* HUD corner ticks (all four corners) */
-  .box::before, .box::after {
-    content: ''; position: absolute;
-    width: 13px; height: 13px;
-    border: 0 solid rgba(0,0,0,0.26);
-    pointer-events: none; z-index: 2;
-  }
-  .box::before { top: 9px; left: 9px; border-top-width: 1px; border-left-width: 1px; }
-  .box::after  { bottom: 9px; right: 9px; border-bottom-width: 1px; border-right-width: 1px; }
-
-  /* geometric glyph next to labels */
   .box-label { display: flex; align-items: center; gap: .6rem; }
-  .box-label .glyph { width: .8rem; height: .8rem; color: rgba(0,0,0,0.4); flex-shrink: 0; }
   .box-label::after {
     content: ''; flex: 1; height: 1px;
-    background: linear-gradient(to right, rgba(0,0,0,0.16), rgba(0,0,0,0));
+    background: linear-gradient(to right, rgba(0,0,0,0.14), rgba(0,0,0,0));
   }
 
-  /* small geometric logo beside the name */
-  .name-wrap { display: flex; align-items: center; }
-  .name-logo { width: 1.6rem; height: 1.6rem; color: rgba(0,0,0,0.5); flex-shrink: 0; margin-right: .9rem; }
-
-  /* wire / pipe layer behind the boxes */
-  #panel { position: relative; padding-left: 30px; padding-right: 30px; }
-  #wires { position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none; overflow: visible; }
-
-  @media (max-width: 680px) {
-    #panel { padding-left: 14px; padding-right: 14px; }
-    #wires { display: none; }   /* gutter too tight on phones */
-  }
+  /* ── FOOTER SPACER ──────────────────────────── */
+  #panel-footer { height: clamp(1rem, 4vh, 3rem); flex-shrink: 0; }
 </style>
 </head>
 <body>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="geo-hex" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
-      <path d="M12 3L20 7.5V16.5L12 21L4 16.5V7.5Z"/>
-    </symbol>
-    <symbol id="geo-tri" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
-      <path d="M12 4L20.5 19H3.5Z"/>
-    </symbol>
-    <symbol id="geo-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
-      <path d="M12 3L21 12L12 21L3 12Z"/><circle cx="12" cy="12" r="1.4"/>
-    </symbol>
-    <symbol id="geo-circle-dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="9"/>
-      <circle cx="12" cy="12" r="1.4"/>
-    </symbol>
-  </defs>
-</svg>
 
 <div id="grid"></div>
 <div id="vignette"></div>
@@ -377,12 +408,11 @@
 
     <!-- NAME -->
     <div class="box" id="name-top">
-      <div class="box-bg" data-poly="ico" data-size="230" data-x="left" data-op="0.05"></div>
       <div class="name-wrap">
         <h1>Nurbolot Altynbek uulu</h1>
       </div>
       <div class="header-right">
-        <span class="role-tag">Software Engineer</span>
+        <span class="role-tag">Software Developer</span>
         <nav class="header-links">
           <a href="mailto:theleere@gmail.com">Email</a>
           <a href="https://github.com/NurbolotAlt" target="_blank" rel="noopener">GitHub</a>
@@ -393,37 +423,98 @@
 
     <!-- BIO -->
     <div class="box" id="box-bio">
-      <p class="box-label"><svg class="glyph"><use href="#geo-circle-dot"/></svg>About</p>
+      <p class="box-label">About</p>
       <p>
-        I'm a 21-year-old junior developer from Bishkek, Kyrgyzstan. I've been into computers for as long as I can remember, which led me to study Computer Science in Taiwan, graduating with honors.
+        I'm a 21-year-old software developer from Bishkek, Kyrgyzstan. I've been into computers since childhood, which led me to study Computer Science at Yuan Ze University in Taiwan, graduating in June 2026 with a 3.9/4.0 GPA.
       </p>
 
       <p>
-        I'm most drawn to backend development — servers, databases, and understanding how systems work under the hood, down to the low-level details. I'm also interested in information security. I write Python and C++ comfortably, and I'm familiar with web development.
+        I'm most drawn to backend development — servers, databases, and understanding how systems work under the hood. I write Python and C++ comfortably, and I'm also familiar with Java, JavaScript, and web development.
       </p>
 
       <p>
-        Right now I'm looking to join a team with a good atmosphere where I can keep learning — happy to take on a variety of tasks, learn from people more experienced than me, and grow somewhere for the long term.
+        I'm looking to join a team with a good atmosphere where I can keep learning — happy to take on a variety of tasks, learn from people more experienced than me, and grow somewhere for the long term.
       </p>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="box" id="box-education">
+      <p class="box-label">Education</p>
+      <div class="edu-head">
+        <h2 class="edu-degree">B.S. Computer Science</h2>
+        <span class="edu-date">Jun 2026</span>
+      </div>
+      <p class="edu-school">Yuan Ze University (YZU), Taiwan — GPA 3.9 / 4.0</p>
+      <div class="edu-tags">
+        <span class="tag">Data Structures &amp; Algorithms</span>
+        <span class="tag">Operating Systems</span>
+        <span class="tag">Computer Networks &amp; Security</span>
+        <span class="tag">Databases</span>
+        <span class="tag">Web Development</span>
+        <span class="tag">Artificial Intelligence</span>
+        <span class="tag">Software Engineering</span>
+        <span class="tag">Computer Architecture</span>
+      </div>
     </div>
 
     <!-- SKILLS -->
     <div class="box" id="box-skills">
-      <div class="box-bg" data-poly="octa" data-size="230" data-x="right" data-op="0.05"></div>
-      <p class="box-label"><svg class="glyph"><use href="#geo-hex"/></svg>Skills</p>
+      <p class="box-label">Skills</p>
       <div class="skill-groups" id="skill-groups"></div>
     </div>
 
     <!-- PROJECTS -->
     <div class="box" id="box-projects">
-      <p class="box-label"><svg class="glyph"><use href="#geo-tri"/></svg>Selected Work</p>
+      <p class="box-label">Selected Work</p>
       <div class="project-list" id="project-list"></div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="box" id="box-experience">
+      <p class="box-label">Experience</p>
+      <div class="job-list">
+        <div class="job-entry">
+          <div class="job-head">
+            <h2 class="job-title">Software Developer — Freelance</h2>
+            <span class="job-date">2025 – 2026</span>
+          </div>
+          <p class="job-sub">Web tooling &amp; AI assistants</p>
+          <ul class="job-points">
+            <li>Built a Python + Selenium scraper for dynamic, bot-protected sites, emulating browser behavior and handling JS-rendered content.</li>
+            <li>Built a configurable conversational AI assistant for customer support (call-center scenario) on a Llama model with scriptable service flows.</li>
+          </ul>
+        </div>
+        <div class="job-entry">
+          <div class="job-head">
+            <h2 class="job-title">Teaching Assistant</h2>
+            <span class="job-date">2024 – 2026</span>
+          </div>
+          <p class="job-sub">Yuan Ze University, Taiwan — Computer Architecture, Calculus, Algorithms &amp; Data Structures</p>
+          <ul class="job-points">
+            <li>Supported course delivery: graded assignments, prepared course materials, and gave feedback during office hours.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="box" id="box-achievements">
+      <p class="box-label">Achievements</p>
+      <div class="achv-list">
+        <div class="achv-row">
+          <span class="achv-text">Full merit scholarship — 6 consecutive semesters</span>
+          <span class="achv-date">2022 – 2025</span>
+        </div>
+        <div class="achv-row">
+          <span class="achv-text">Microsoft Certified: Azure Data Fundamentals</span>
+          <span class="achv-date">2024</span>
+        </div>
+      </div>
     </div>
 
     <!-- CONTACT -->
     <div class="box" id="box-contact">
-      <div class="box-bg" data-poly="tetra" data-size="210" data-x="right" data-op="0.05"></div>
-      <p class="box-label"><svg class="glyph"><use href="#geo-square"/></svg>Contact</p>
+      <p class="box-label">Contact</p>
       <div class="contact-links">
         <a class="contact-link" href="mailto:theleere@gmail.com">
           theleere@gmail.com <span>→</span>
@@ -437,7 +528,7 @@
       </div>
     </div>
 
-    <p id="panel-footer">© 2026 Your Name</p>
+    <div id="panel-footer"></div>
 
   </div>
 </div>
@@ -575,11 +666,10 @@ requestAnimationFrame(tick);
 
 /* ── SKILLS ─────────────────────────────────────── */
 const skills = [
-  { group: 'Languages',  items: ['Python', 'C++', 'C', 'Java', 'JavaScript', 'SQL'] },
-  { group: 'Backend',    items: ['Node.js', 'REST APIs'] },
-  { group: 'Databases',  items: ['MySQL', 'MongoDB'] },
-  { group: 'ML / Vision', items: ['OpenCV', 'MediaPipe', 'NumPy'] },
-  { group: 'Tools',      items: ['Git', 'Docker', 'Linux', 'Jira'] },
+  { group: 'Languages',  items: ['Python', 'Java', 'JavaScript', 'C', 'C++', 'SQL'] },
+  { group: 'Frameworks', items: ['FastAPI', 'Spring Boot', 'React', 'Express'] },
+  { group: 'Tools & Platforms', items: ['Git', 'Docker', 'AWS', 'PostgreSQL', 'MongoDB', 'Linux', 'Redis', 'Ollama', 'REST API', 'CI/CD', 'Jira'] },
+  { group: 'Concepts',   items: ['OOP', 'Data Structures', 'Algorithms', 'Machine Learning', 'Async Programming', 'Multiprocessing', 'RAG'] },
 ];
 const sg = document.getElementById('skill-groups');
 skills.forEach(s => {
@@ -591,11 +681,10 @@ skills.forEach(s => {
 
 /* ── PROJECTS ────────────────────────────────────── */
 const projects = [
-  { num:'01', title:'AI Fitness Trainer',   desc:'An AI fitness trainer that uses pose estimation to track and analyze exercise movements.',       tags:['React','TypeScript'], href:'#' },
-  { num:'02', title:'MITM Solution Proof Of Concept',    desc:'Experimental solution to man-in-the-middle attacks, with custom key exchange, gmail api usage and functional authorization system with database.',       tags:['Node.js','PostgreSQL'], href:'#' },
-  { num:'03', title:'SVM Sentiment Analyzer',   desc:'A simple app that uses an SVM model to analyze text and predict whether the sentiment is positive or negative.',         tags:['Python','ML'], href:'#' },
-  { num:'04', title:'Textile Defect Detection with YOLO',   desc:'A computer vision system using YOLO to detect defects in textile images.',                tags:['Rust','OSS'], href:'#' },
-  { num:'05', title:'CSV Mini Database & Query Engine', desc:'A lightweight, interactive database engine written in C++17 that loads CSV files into memory and queries them with a familiar SQL-like syntax.',            tags:['Design Systems','Figma'], href:'#' },
+  { num:'01', title:'Bank App', desc:'REST API for a ledger-based banking backend — transfers, deposits, and interest-bearing P2P loans are posted as atomic accounting entries instead of direct balance updates. Integration tests on Testcontainers surfaced a race condition on concurrent transfers and a Spring AOP self-invocation bug, both fixed; JWT auth built from scratch, plus a Flutter mobile client.', tags:['Java','Spring Boot','PostgreSQL'], href:'https://github.com/NurbolotAlt/bank-app-flutter' },
+  { num:'02', title:'Local RAG', desc:'Retrieval-Augmented Generation pipeline over local documents with three configurable chunking strategies (fixed, semantic, semantic-percentile). Fully local stack, no paid cloud APIs — Ollama for embeddings and generation, PostgreSQL + pgvector (HNSW) for similarity search; the /ask endpoint returns source chunks alongside the answer.', tags:['FastAPI','pgvector','Ollama'], href:'https://github.com/NurbolotAlt/local-rag-ollama-pgvector' },
+  { num:'03', title:'csv_db — Mini Database & Query Engine', desc:'Interactive database engine that loads CSV files into memory and runs SQL-like queries: SELECT, WHERE with AND/OR, ORDER BY, LIMIT, COUNT, DISTINCT, LIKE. Includes an RFC-4180 CSV parser, a recursive-descent query parser, hash-indexed columns, and Levenshtein-distance keyword autocorrection.', tags:['C++17'], href:'https://github.com/NurbolotAlt/csv_db' },
+  { num:'04', title:'SecureNotes', desc:'Proof-of-concept full-stack app demonstrating key exchange over two independent channels (HTTP + email) to defend against man-in-the-middle attacks on an unencrypted connection — the client half of the key travels out-of-band via the Gmail API, so a network-level attacker can\'t reconstruct the shared key.', tags:['React','Node.js','MongoDB'], href:'https://github.com/NurbolotAlt/SecureNotes_mitm_resistant_auth' },
 ];
 const pl = document.getElementById('project-list');
 projects.forEach(p => {
@@ -612,144 +701,6 @@ projects.forEach(p => {
   pl.appendChild(a);
 });
 
-
-/* ════════════════════════════════════════════
-   GEOMETRIC 3D WIREFRAMES + WIRES
-   ════════════════════════════════════════════ */
-(function geoLayer() {
-  const NS = 'http://www.w3.org/2000/svg';
-  const PHI = (1 + Math.sqrt(5)) / 2;
-
-  const SHAPES = {
-    octa:  [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
-    cube:  [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]],
-    tetra: [[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],
-    ico:   [[-1,PHI,0],[1,PHI,0],[-1,-PHI,0],[1,-PHI,0],
-            [0,-1,PHI],[0,1,PHI],[0,-1,-PHI],[0,1,-PHI],
-            [PHI,0,-1],[PHI,0,1],[-PHI,0,-1],[-PHI,0,1]],
-  };
-
-  function rot(v, ax, ay) {
-    let [x, y, z] = v;
-    let y1 = y * Math.cos(ax) - z * Math.sin(ax);
-    let z1 = y * Math.sin(ax) + z * Math.cos(ax);
-    y = y1; z = z1;
-    let x1 = x * Math.cos(ay) + z * Math.sin(ay);
-    z = -x * Math.sin(ay) + z * Math.cos(ay);
-    x = x1;
-    return [x, y, z];
-  }
-
-  function pathFor(type, S) {
-    const V = SHAPES[type];
-    const n = V.length;
-    const d3 = (a, b) => Math.hypot(V[a][0]-V[b][0], V[a][1]-V[b][1], V[a][2]-V[b][2]);
-    let minD = Infinity;
-    for (let i = 0; i < n; i++) for (let j = i+1; j < n; j++) minD = Math.min(minD, d3(i,j));
-    const edges = [];
-    for (let i = 0; i < n; i++) for (let j = i+1; j < n; j++) if (d3(i,j) < minD*1.08) edges.push([i,j]);
-    const P = V.map(v => { const r = rot(v, 0.5, 0.6); return [r[0], r[1]]; });
-    const xs = P.map(p=>p[0]), ys = P.map(p=>p[1]);
-    const mnx=Math.min(...xs), mxx=Math.max(...xs), mny=Math.min(...ys), mxy=Math.max(...ys);
-    const sc = S*0.92 / Math.max(mxx-mnx, mxy-mny);
-    const ox = (S-(mxx-mnx)*sc)/2 - mnx*sc, oy = (S-(mxy-mny)*sc)/2 - mny*sc;
-    let d = '';
-    edges.forEach(([a,b]) => {
-      d += `M${(P[a][0]*sc+ox).toFixed(1)} ${(P[a][1]*sc+oy).toFixed(1)}`
-         + `L${(P[b][0]*sc+ox).toFixed(1)} ${(P[b][1]*sc+oy).toFixed(1)}`;
-    });
-    return d;
-  }
-
-  function svgEl(type, S, stroke, sw) {
-    const svg = document.createElementNS(NS, 'svg');
-    svg.setAttribute('viewBox', `0 0 ${S} ${S}`);
-    svg.setAttribute('width', S);
-    svg.setAttribute('height', S);
-    const p = document.createElementNS(NS, 'path');
-    p.setAttribute('d', pathFor(type, S));
-    p.setAttribute('fill', 'none');
-    p.setAttribute('stroke', stroke || 'currentColor');
-    p.setAttribute('stroke-width', sw || 1);
-    p.setAttribute('stroke-linejoin', 'round');
-    svg.appendChild(p);
-    return svg;
-  }
-
-  // fill big background shapes
-  document.querySelectorAll('.box-bg').forEach(bg => {
-    const type = bg.dataset.poly, S = +bg.dataset.size || 240;
-    const op = bg.dataset.op || '0.08';
-    const svg = svgEl(type, S, `rgba(0,0,0,${op})`, 1.3);
-    if (bg.dataset.x === 'left') { svg.style.left = '-30px'; }
-    else { svg.style.right = '-44px'; }
-    svg.style.top = '50%';
-    svg.style.transform = 'translateY(-50%)';
-    bg.appendChild(svg);
-  });
-
-  // fill small name logo (octahedron) — size controlled by CSS .name-logo
-  document.querySelectorAll('.name-logo').forEach(el => {
-    const svg = svgEl(el.dataset.poly || 'octa', 24, 'currentColor', 1.6);
-    svg.removeAttribute('width'); svg.removeAttribute('height');
-    svg.setAttribute('class', 'name-logo');
-    el.replaceWith(svg);
-  });
-
-  // ── WIRES: left bus + branch stubs into each box ──
-  function buildWires() {
-    const panel = document.getElementById('panel');
-    if (!panel) return;
-    let old = document.getElementById('wires');
-    if (old) old.remove();
-    if (window.innerWidth <= 680) return;
-
-    const W = panel.offsetWidth, H = panel.offsetHeight;
-    const svg = document.createElementNS(NS, 'svg');
-    svg.id = 'wires';
-    svg.setAttribute('width', W);
-    svg.setAttribute('height', H);
-
-    const boxes = [...panel.querySelectorAll('.box')];
-    const busX = 12, boxX = 30; // boxX = panel left padding
-    const centers = boxes.map(b => b.offsetTop + b.offsetHeight / 2);
-    const top = centers[0], bot = centers[centers.length - 1];
-
-    const line = (x1,y1,x2,y2,w,o) => {
-      const l = document.createElementNS(NS,'line');
-      l.setAttribute('x1',x1); l.setAttribute('y1',y1);
-      l.setAttribute('x2',x2); l.setAttribute('y2',y2);
-      l.setAttribute('stroke',`rgba(0,0,0,${o})`); l.setAttribute('stroke-width',w);
-      svg.appendChild(l);
-    };
-    const dot = (x,y,r,o) => {
-      const c = document.createElementNS(NS,'circle');
-      c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r',r);
-      c.setAttribute('fill',`rgba(0,0,0,${o})`);
-      svg.appendChild(c);
-    };
-
-    // vertical bus
-    line(busX, top, busX, bot, 1, 0.16);
-    dot(busX, top, 2, 0.28);
-    dot(busX, bot, 2, 0.28);
-    // branch into each box
-    centers.forEach(cy => {
-      line(busX, cy, boxX, cy, 1, 0.16);
-      dot(busX, cy, 1.6, 0.22);
-      dot(boxX, cy, 2.2, 0.3);   // port dot on box edge
-    });
-
-    panel.insertBefore(svg, panel.firstChild);
-  }
-
-  buildWires();
-  let wt;
-  window.addEventListener('resize', () => { clearTimeout(wt); wt = setTimeout(buildWires, 160); });
-  // rebuild after fonts settle / content reflow
-  setTimeout(buildWires, 400);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildWires);
-})();
 </script>
 </body>
 </html>
